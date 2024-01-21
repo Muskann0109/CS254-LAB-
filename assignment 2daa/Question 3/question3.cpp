@@ -1,21 +1,32 @@
 #include<bits/stdc++.h>
+// #include<iostream>
+// #include<math.h>
 using namespace std;
 
-void insertionSort(int A[],int n){
-    for(int i=1;i<n;i++){
-        int key = A[i];
-        int j=i-1;
-        while(j>=0 && A[j]>key){
-            A[j+1]=A[j];
-            j--;
+void merge_in_place(int a[],int s,int m,int e){
+    int gap=m;
+    while(gap>=1){
+        for(int i=s;i+gap<e;i++){
+            if(a[i]>a[i+gap]){
+                swap(a[i],a[i+gap]);
+            }
         }
-        A[j+1]=key;
+        if(gap==1){gap=0;}
+        else{
+            gap=ceil(gap/2.00);
+        }
     }
-
 }
-
+void merge_sort(int a[],int s,int e){
+    if(s>=e){return;}
+    int mid=(s+e)/2;
+    merge_sort(a,s,mid);
+    merge_sort(a,mid+1,e);
+    merge_in_place(a,s,mid+1,e);
+}
+    
+int a[10000000];
 int main(){
-
     ifstream inputFile("input.txt");
     if(!inputFile.is_open()){
         cerr<<"Error opening the input file"<<endl;
@@ -24,25 +35,19 @@ int main(){
     if(!outputFile.is_open()){
         cerr<<"Error opening the output file"<<endl;
     }
-
-    // n is the total size of the array
     int n;
     inputFile>>n;
-    
-    int *A = new int[n];
-    for(int i=0;i<n;i++){inputFile>>A[i];}
-    inputFile.close();
-
+    for(int i=0;i<n;i++){
+        inputFile>>a[i];
+    }
     clock_t start,end;
     start=clock();
-    insertionSort(A,n);
+    merge_sort(a,0,n);
     end=clock();
-
-    outputFile<<"The sorted array(using insertion sort algo.) : "<<endl;
-    for(int i=0;i<n;i++){
-        outputFile<<A[i]<<" ";
-    }
-    outputFile<<endl;
     double time_taken = double(end-start)/double(CLOCKS_PER_SEC);
-    outputFile<<"The time taken to run the program is: "<<time_taken<<" sec"<<endl;
+
+    outputFile<<"The time taken to run the program is: "<<time_taken<<" sec for "<<n<<" elements"<<endl;
+    for(int i=0;i<n;i++){outputFile<<a[i]<<" ";}
+    outputFile<<endl;
+    return 0;
 }
