@@ -14,7 +14,7 @@ long long max_subsequence(int i, long long &ans, vector<long long> &a){
 int main(){
     freopen("input_Ques2.txt","r",stdin);
     freopen("output_Ques2.txt","w",stdout);
-    int t; cin >> t;
+    int t; cin>>t;
     while(t--){
         int n; cin >> n;
         vector<long long> a(n);
