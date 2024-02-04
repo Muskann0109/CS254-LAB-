@@ -1,0 +1,5 @@
+Median of the two sorted arrays: 32690
+Median of the two sorted arrays: 1150
+Median of the two sorted arrays: 9753
+Median of the two sorted arrays: -20725
+Median of the two sorted arrays: -16131
