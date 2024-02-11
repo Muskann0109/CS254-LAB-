@@ -1,1 +1,0 @@
-Median of the two sorted arrays: 5
